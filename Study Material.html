@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Material - Educational Portal</title>
+    <link rel="icon" href="img/horizontal-stack-colored-books-flat-icon-vector-7320915.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .logo-svg {
+            width: 40px; /* Controls SVG size */
+            height: 40px;
+            flex-shrink: 0; /* Prevents SVG from shrinking */
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .profile-name {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .profile-icon {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #667eea;
+            color: #667eea;
+            background-color: transparent;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-btn:hover {
+            background-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .logout-btn:hover {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        /* Login & Signup Pages */
+        .login-container, .admin-container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-card, .signup-card, .admin-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        
+        .admin-card {
+            max-width: 600px;
+        }
+
+        .login-card h1, .signup-card h1, .admin-card h1 {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-card h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .login-card h1 .logo-svg {
+             width: 44px;
+             height: 44px;
+        }
+
+        .login-card h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .welcome-text {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            background-color: #fff;
+        }
+        
+        .form-group input[type="password"],
+        .form-group input[type="text"].password-input {
+             padding-right: 50px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #e0e0e0; 
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(10%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #000;
+            transition: opacity 0.2s ease;
+        }
+        .password-toggle-btn:hover {
+            opacity: 0.7;
+        }
+        .password-toggle-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .signup-link {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a, .back-to-login {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover, .back-to-login:hover {
+            text-decoration: underline;
+        }
+
+        .back-to-login, #backToMainBtn {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+            background: none;
+            border: none;
+            color: #667eea;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #backToMainBtn:hover {
+             text-decoration: underline;
+        }
+
+        /* Password Strength Meter */
+        .strength-meter {
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 8px;
+            display: none; 
+            overflow: hidden;
+        }
+
+        .strength-meter-bar {
+            height: 100%;
+            width: 0;
+            background: #f44336;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-meter-bar.weak { width: 33%; background: #f44336; }
+        .strength-meter-bar.medium { width: 67%; background: #ff9800; }
+        .strength-meter-bar.strong { width: 100%; background: #4caf50; }
+
+        .strength-text {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 4px;
+            height: 1em;
+        }
+
+        /* Selection Page Styles */
+        .selection-container {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .selection-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .selection-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .selection-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .selection-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .selection-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .board-type-grid, .class-grid, .stream-grid, .subject-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .board-type-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .class-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .stream-grid, .subject-grid {
+             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .board-type-option, .class-option, .stream-option, .subject-option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .board-type-option:hover, .class-option:hover, .stream-option:hover, .subject-option:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .board-type-option.selected, .class-option.selected, .stream-option.selected, .subject-option.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .icon, .class-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .board-type-option h3, .class-option h3, .stream-option h3, .subject-option span {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-type-option p, .class-option p, .stream-option p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .view-materials-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .view-materials-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Main Website Styles */
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .selection-bars {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .selection-bars h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .selection-bar {
+            margin-bottom: 2rem;
+        }
+
+        .selection-bar label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .selection-bar select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            color: #333;
+            outline: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .selection-bar select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .main-view-materials-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            margin: 2rem auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .main-view-materials-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+
+        .main-view-materials-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .quick-access h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .access-card-link {
+            display: block;
+            text-decoration: none;
+        }
+
+        .access-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            height: 100%;
+        }
+
+        .access-card-link:hover .access-card {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .access-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .access-card-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+
+        .access-card p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-link-section {
+            margin-top: 4rem;
+        }
+        
+        .featured-link-card {
+            display: block;
+            text-decoration: none;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        
+        .featured-link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-image: linear-gradient(45deg, #667eea, #764ba2) 1;
+        }
+        
+        .featured-link-card .icon {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .kalvi-news-icon {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .featured-link-card h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured-link-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .visit-link {
+            font-weight: bold;
+            color: #667eea;
+            transition: color 0.3s ease;
+        }
+        
+        .featured-link-card:hover .visit-link {
+            color: #764ba2;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <h1>
+                <div class="logo-svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <rect x="15" y="10" width="70" height="80" rx="8" ry="8" fill="#8B4513"/>
+                        <rect x="25" y="10" width="5" height="80" fill="#654321"/>
+                        <rect x="30" y="18" width="50" height="64" fill="#F5DEB3"/>
+                        <path d="M 60 10 L 60 40 L 55 50 L 50 40 Z" fill="#DAA520"/>
+                    </svg>
+                </div>
+                Study Material
+            </h1>
+            <h2>Login</h2>
+            <p class="welcome-text">Please sign in to continue.</p>
+            <div id="loginMessage"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginName">Full Name</label>
+                    <input type="text" id="loginName" name="loginName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="password-input" name="password" required placeholder="Enter your password">
+                    <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('password', this)">
+                        <span class="icon-show">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                        </span>
+                        <span class="icon-hide hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L6.228 6.228" /></svg>
+                        </span>
+                    </button>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p class="signup-link">
+                Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a>
+            </p>
+        </div>
+    </div>
+    <div id="signupPage" class="login-container hidden">
+        <div class="signup-card">
+            <h1>Join Study Material</h1>
+            <p class="welcome-text">Create your account to access resources.</p>
+            <div id="signupMessage"></div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" class="password-input" name="password" required placeholder="Create a password">
+                    <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('signupPassword', this)">
+                        <span class="icon-show">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                        </span>
+                        <span class="icon-hide hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L6.228 6.228" /></svg>
+                        </span>
+                    </button>
+                    <div id="passwordStrength" class="strength-meter">
+                        <div class="strength-meter-bar"></div>
+                    </div>
+                    <p id="passwordStrengthText" class="strength-text"></p>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="password-input" name="confirmPassword" required placeholder="Confirm your password">
+                     <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('confirmPassword', this)">
+                        <span class="icon-show">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                        </span>
+                        <span class="icon-hide hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L6.228 6.228" /></svg>
+                        </span>
+                    </button>
+                </div>
+                <button type="submit" class="login-btn">Create Account</button>
+            </form>
+            <a href="#" onclick="showLogin()" class="back-to-login">← Back to Sign In</a>
+        </div>
+    </div>
+    <div id="selectionPage" class="selection-container hidden">
+        <div class="selection-header">
+            <h1>Select Your Preferences</h1>
+            <p>Choose your board, class, and subject to access study materials</p>
+        </div>
+        <div class="selection-section">
+            <h2>🏫 Select Your Board</h2>
+            <div class="board-type-grid">
+                <div class="board-type-option" onclick="selectBoardType('stateBoard')">
+                    <div class="icon">🏛️</div>
+                    <h3>State Board</h3>
+                    <p>Samacheer Kalvi (TNSCERT)</p>
+                </div>
+                <div class="board-type-option" onclick="selectBoardType('cbse')">
+                    <div class="icon">🌐</div>
+                    <h3>CBSE</h3>
+                    <p>Central Board of Secondary Education</p>
+                </div>
+            </div>
+        </div>
+        <div id="classSelection" class="selection-section" style="display: none;">
+            <h2>📚 Select Your Class</h2>
+            <div class="class-grid" id="classGrid"></div>
+        </div>
+        <div id="streamSelection" class="selection-section" style="display: none;">
+            <h2>📋 Select Stream</h2>
+            <div class="stream-grid" id="streamContainer"></div>
+        </div>
+        <div id="subjectSelection" class="selection-section" style="display: none;">
+            <h2>📝 Select Subject</h2>
+            <div class="subject-grid" id="subjectContainer"></div>
+        </div>
+        <button id="viewMaterialsBtn" class="view-materials-btn" onclick="viewMaterials()">
+            View Study Materials 📚
+        </button>
+    </div>
+    <div id="mainWebsite" class="hidden">
+        <header>
+            <div class="container">
+                <nav>
+                    <a href="#" class="logo">
+                        <div class="logo-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                                <rect x="15" y="10" width="70" height="80" rx="8" ry="8" fill="#8B4513"/>
+                                <rect x="25" y="10" width="5" height="80" fill="#654321"/>
+                                <rect x="30" y="18" width="50" height="64" fill="#F5DEB3"/>
+                                <path d="M 60 10 L 60 40 L 55 50 L 50 40 Z" fill="#DAA520"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Study Material</span>
+                    </a>
+                    <div class="header-actions">
+                        <img src="https://cdn-icons-png.flaticon.com/512/201/201818.png" alt="Profile" class="profile-icon">
+                        <span id="userNameDisplay" class="profile-name"></span>
+                        <button id="adminBtn" class="header-btn">Admin</button>
+                        <button id="logoutBtn" class="header-btn logout-btn">Logout</button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="container">
+            <section class="hero">
+                <h1>Welcome to Study Material</h1>
+                <p>Your Complete Educational Portal for State Board & CBSE</p>
+                <a href="#resources" class="cta-button">Start Learning</a>
+            </section>
+            <section id="resources" class="selection-bars">
+                <h2>📚 Select Your Study Materials</h2>
+                <div class="selection-bar">
+                    <label for="mainBoardTypeSelect">🏫 Select Board:</label>
+                    <select id="mainBoardTypeSelect" onchange="updateMainClasses()">
+                        <option value="">Choose your board</option>
+                        <option value="stateBoard">State Board (Samacheer Kalvi)</option>
+                        <option value="cbse">CBSE</option>
+                    </select>
+                </div>
+                <div class="selection-bar">
+                    <label for="mainClassSelect">📖 Select Class:</label>
+                    <select id="mainClassSelect" onchange="updateMainStreams()" disabled>
+                        <option value="">Choose your class</option>
+                    </select>
+                </div>
+                <div class="selection-bar">
+                    <label for="mainStreamSelect">📋 Select Stream:</label>
+                    <select id="mainStreamSelect" onchange="updateMainSubjects()" disabled>
+                        <option value="">Choose your stream</option>
+                    </select>
+                </div>
+                <div class="selection-bar">
+                    <label for="mainSubjectSelect">📝 Select Subject:</label>
+                    <select id="mainSubjectSelect" onchange="checkMainSelection()" disabled>
+                        <option value="">Choose your subject</option>
+                    </select>
+                </div>
+                <button id="mainViewMaterialsBtn" class="main-view-materials-btn" onclick="redirectToMaterials()" disabled>
+                    🌐 View Study Materials
+                </button>
+            </section>
+            <main class="main-content">
+                <section class="quick-access">
+                    <h2>Quick Access</h2>
+                    <div class="access-grid">
+                        <a href="https://www.tntextbooks.in/p/school-books.html" target="_blank" rel="noopener noreferrer" class="access-card-link">
+                            <div class="access-card">
+                                <h3>
+                                    <div class="access-card-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 18.5V6.5c0-.8.7-1.5 1.5-1.5H18v13H5.5c-.8 0-1.5-.7-1.5-1.5z" fill="#4285F4"/>
+                                            <path d="M18 5v13h1.5c.8 0 1.5-.7 1.5-1.5V6.5c0-.8-.7-1.5-1.5-1.5H18z" fill="#3B78E7"/>
+                                            <path d="M4 15.5V4.5c0-.8.7-1.5 1.5-1.5H16v12H5.5c-.8 0-1.5-.7-1.5-1.5z" fill="#34A853"/>
+                                            <path d="M16 3v12h1.5c.8 0 1.5-.7 1.5-1.5V4.5c0-.8-.7-1.5-1.5-1.5H16z" fill="#2E944A"/>
+                                            <path d="M4 12.5V2.5c0-.8.7-1.5 1.5-1.5H14v11H5.5c-.8 0-1.5-.7-1.5-1.5z" fill="#EA4335"/>
+                                            <path d="M14 1v11h1.5c.8 0 1.5-.7 1.5-1.5V2.5c0-.8-.7-1.5-1.5-1.5H14z" fill="#D93025"/>
+                                        </svg>
+                                    </div>
+                                    <span>Textbooks</span>
+                                </h3>
+                                <p>Download official textbooks from the TN Textbooks portal.</p>
+                                <small>Tamil Nadu State Board</small>
+                            </div>
+                        </a>
+                        <a href="https://samacheerkalvi.guru/samacheer-kalvi-10th-model-question-papers/" target="_blank" rel="noopener noreferrer" class="access-card-link">
+                             <div class="access-card">
+                                <h3>
+                                    <div class="access-card-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6z" fill="#fff"/>
+                                            <path d="M14 2v6h6L14 2z" fill="#E0E0E0"/>
+                                            <text x="12" y="18" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#757575">?</text>
+                                        </svg>
+                                    </div>
+                                    <span>Question Papers</span>
+                                </h3>
+                                <p>Access 10th Std model question papers on SamacheerKalvi.guru.</p>
+                                <small>State Board Model Papers</small>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                <section class="featured-link-section">
+                     <h2>Featured Resource</h2>
+                     <a href="https://www.kalvinews.com" target="_blank" rel="noopener noreferrer" class="featured-link-card">
+                         <span class="icon kalvi-news-icon">📰</span>
+                         <h3>Kalvi News</h3>
+                         <p>Get the latest educational news, circulars, and updates.</p>
+                         <span class="visit-link">Visit Site →</span>
+                     </a>
+                </section>
+            </main>
+        </div>
+        <footer>
+            <div class="container">
+                <p>© 2025 Study Book. All rights reserved. | Educational Portal for Tamil Nadu & CBSE Students</p>
+            </div>
+        </footer>
+    </div>
+    <div id="adminPage" class="admin-container hidden">
+        <div class="admin-card">
+            <h1>Admin Upload Panel</h1>
+            <div id="uploadMessage"></div>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="adminBoardType">Board</label>
+                    <select id="adminBoardType" required>
+                        <option value="">Choose board</option>
+                        <option value="stateBoard">State Board</option>
+                        <option value="cbse">CBSE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="adminClass">Class</label>
+                    <select id="adminClass" required disabled><option value="">Choose class</option></select>
+                </div>
+                <div class="form-group">
+                    <label for="adminStream">Stream</label>
+                    <select id="adminStream" required disabled><option value="">Choose stream</option></select>
+                </div>
+                <div class="form-group">
+                    <label for="adminSubject">Subject</label>
+                    <select id="adminSubject" required disabled><option value="">Choose subject</option></select>
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload">Select File</label>
+                    <input type="file" id="fileUpload" required>
+                </div>
+                <button type="submit" class="login-btn">Upload File</button>
+            </form>
+            <button id="backToMainBtn">← Back to Main Website</button>
+        </div>
+    </div>
+    
+    <script>
+        // --- DATA ---
+        const subjectsData = {
+            stateBoard: {
+                1: { general: ['Tamil', 'English', 'Maths', 'Environmental Science'] },
+                2: { general: ['Tamil', 'English', 'Maths', 'Environmental Science'] },
+                3: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                4: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                5: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                6: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                7: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                8: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                9: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                10: { general: ['Tamil', 'English', 'Maths', 'Science', 'Social Science'] },
+                11: {
+                    science: ['Tamil', 'English', 'Maths', 'Physics', 'Chemistry', 'Biology', 'Computer Science'],
+                    commerce: ['Tamil', 'English', 'Commerce', 'Accountancy', 'Economics', 'Computer Applications'],
+                    arts: ['Tamil', 'English', 'History', 'Geography', 'Political Science', 'Economics']
+                },
+                12: {
+                    science: ['Tamil', 'English', 'Maths', 'Physics', 'Chemistry', 'Biology', 'Computer Science'],
+                    commerce: ['Tamil', 'English', 'Commerce', 'Accountancy', 'Economics', 'Computer Applications'],
+                    arts: ['Tamil', 'English', 'History', 'Geography', 'Political Science', 'Economics']
+                }
+            },
+            cbse: {
+                1: { general: ['English', 'Hindi', 'Maths', 'EVS'] },
+                2: { general: ['English', 'Hindi', 'Maths', 'EVS'] },
+                3: { general: ['English', 'Hindi', 'Maths', 'EVS', 'Computer'] },
+                4: { general: ['English', 'Hindi', 'Maths', 'EVS', 'Computer'] },
+                5: { general: ['English', 'Hindi', 'Maths', 'EVS', 'Computer'] },
+                6: { general: ['English', 'Hindi', 'Maths', 'Science', 'Social Science', 'Sanskrit'] },
+                7: { general: ['English', 'Hindi', 'Maths', 'Science', 'Social Science', 'Sanskrit'] },
+                8: { general: ['English', 'Hindi', 'Maths', 'Science', 'Social Science', 'Sanskrit'] },
+                9: { general: ['English', 'Hindi', 'Maths', 'Science', 'Social Science'] },
+                10: { general: ['English', 'Hindi', 'Maths', 'Science', 'Social Science'] },
+                11: {
+                    science: ['English', 'Maths', 'Physics', 'Chemistry', 'Biology', 'Computer Science'],
+                    commerce: ['English', 'Accountancy', 'Business Studies', 'Economics', 'Maths'],
+                    humanities: ['English', 'History', 'Geography', 'Political Science', 'Economics', 'Sociology']
+                },
+                12: {
+                    science: ['English', 'Maths', 'Physics', 'Chemistry', 'Biology', 'Computer Science'],
+                    commerce: ['English', 'Accountancy', 'Business Studies', 'Economics', 'Maths'],
+                    humanities: ['English', 'History', 'Geography', 'Political Science', 'Economics', 'Sociology']
+                }
+            }
+        };
+        const streamNames = { general: 'General', science: 'Science Group', commerce: 'Commerce Group', arts: 'Arts Group', humanities: 'Humanities / Arts' };
+        
+        // --- STATE VARIABLES ---
+        let users = [];
+        let loggedInUserName = '';
+        let selectedBoardType = null;
+        let selectedClass = null;
+        let selectedStream = null;
+        let selectedSubject = null;
+        let currentPasswordScore = 0;
+
+        // --- DOM ELEMENT REFERENCES ---
+        const pages = { login: document.getElementById('loginPage'), signup: document.getElementById('signupPage'), selection: document.getElementById('selectionPage'), main: document.getElementById('mainWebsite'), admin: document.getElementById('adminPage'), };
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const loginMessage = document.getElementById('loginMessage');
+        const signupMessage = document.getElementById('signupMessage');
+        const signupPasswordInput = document.getElementById('signupPassword');
+        const strengthMeter = document.getElementById('passwordStrength');
+        const strengthBar = strengthMeter.querySelector('.strength-meter-bar');
+        const strengthText = document.getElementById('passwordStrengthText');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        const backToMainBtn = document.getElementById('backToMainBtn');
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        const classSelectionDiv = document.getElementById('classSelection');
+        const streamSelectionDiv = document.getElementById('streamSelection');
+        const subjectSelectionDiv = document.getElementById('subjectSelection');
+        const classGrid = document.getElementById('classGrid');
+        const streamContainer = document.getElementById('streamContainer');
+        const subjectContainer = document.getElementById('subjectContainer');
+        const viewMaterialsBtn = document.getElementById('viewMaterialsBtn');
+        const mainBoardTypeSelect = document.getElementById('mainBoardTypeSelect');
+        const mainClassSelect = document.getElementById('mainClassSelect');
+        const mainStreamSelect = document.getElementById('mainStreamSelect');
+        const mainSubjectSelect = document.getElementById('mainSubjectSelect');
+        const mainViewMaterialsBtn = document.getElementById('mainViewMaterialsBtn');
+        const uploadForm = document.getElementById('uploadForm');
+        const uploadMessage = document.getElementById('uploadMessage');
+        const adminBoardType = document.getElementById('adminBoardType');
+        const adminClass = document.getElementById('adminClass');
+        const adminStream = document.getElementById('adminStream');
+        const adminSubject = document.getElementById('adminSubject');
+        const fileUpload = document.getElementById('fileUpload');
+
+        // --- FUNCTIONS ---
+
+        // Page Navigation
+        function showPage(pageName) { 
+            Object.values(pages).forEach(page => page.classList.add('hidden')); 
+            if (pages[pageName]) pages[pageName].classList.remove('hidden'); 
+        }
+        function showSignup() { showPage('signup'); }
+        function showLogin() { showPage('login'); }
+
+        // Password Visibility Toggle
+        function togglePasswordVisibility(inputId, button) {
+            const input = document.getElementById(inputId);
+            const iconShow = button.querySelector('.icon-show');
+            const iconHide = button.querySelector('.icon-hide');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                input.classList.add('password-input');
+                iconShow.classList.add('hidden');
+                iconHide.classList.remove('hidden');
+            } else {
+                input.type = 'password';
+                input.classList.remove('password-input');
+                iconShow.classList.remove('hidden');
+                iconHide.classList.add('hidden');
+            }
+        }
+
+        // --- EVENT LISTENERS ---
+
+        // Header Buttons
+        logoutBtn.addEventListener('click', () => {
+            loggedInUserName = '';
+            userNameDisplay.textContent = '';
+            loginForm.reset();
+            showPage('login');
+        });
+        adminBtn.addEventListener('click', () => showPage('admin'));
+        backToMainBtn.addEventListener('click', () => showPage('main'));
+        
+        // Login Form Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = loginForm.loginName.value;
+            const email = loginForm.email.value;
+            const password = loginForm.password.value;
+            
+            if (name && email && password) {
+                loggedInUserName = name;
+                userNameDisplay.textContent = loggedInUserName;
+                loginMessage.innerHTML = `<div class="success-message">Login successful! Welcome, ${name}.</div>`;
+                setTimeout(() => {
+                    loginMessage.innerHTML = '';
+                    showPage('main');
+                }, 1500);
+            } else {
+                loginMessage.innerHTML = `<div class="error-message">Please fill in all fields.</div>`;
+            }
+        });
+
+        // Signup Form Submission
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullName = signupForm.fullName.value;
+            const email = signupForm.signupEmail.value;
+            const password = signupForm.signupPassword.value;
+            const confirmPassword = signupForm.confirmPassword.value;
+            signupMessage.innerHTML = '';
+            if (currentPasswordScore < 5) {
+                signupMessage.innerHTML = `<div class="error-message">Password is not strong enough. It must contain uppercase, lowercase, numbers, and symbols (min. 8 characters).</div>`;
+                return;
+            }
+            if (password !== confirmPassword) {
+                signupMessage.innerHTML = `<div class="error-message">Passwords do not match.</div>`;
+                return;
+            }
+            if (users.some(u => u.email === email)) {
+                signupMessage.innerHTML = `<div class="error-message">An account with this email already exists.</div>`;
+                return;
+            }
+            users.push({ fullName, email, password });
+            loggedInUserName = fullName;
+            userNameDisplay.textContent = loggedInUserName;
+            signupMessage.innerHTML = `<div class="success-message">Account created successfully! Welcome, ${fullName}.</div>`;
+            setTimeout(() => { signupMessage.innerHTML = ''; showPage('selection'); }, 2000);
+        });
+
+        // Password Strength Checker
+        signupPasswordInput.addEventListener('input', () => {
+            const password = signupPasswordInput.value;
+            if (password.length === 0) {
+                strengthMeter.style.display = 'none';
+                strengthText.textContent = '';
+                currentPasswordScore = 0;
+                return;
+            }
+            strengthMeter.style.display = 'block';
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Z]/.test(password)) score++;
+            currentPasswordScore = score;
+            strengthBar.className = 'strength-meter-bar'; 
+            switch (score) {
+                case 1: case 2:
+                    strengthBar.classList.add('weak');
+                    strengthText.textContent = 'Weak 😟';
+                    break;
+                case 3: case 4:
+                    strengthBar.classList.add('medium');
+                    strengthText.textContent = 'Medium 🤔';
+                    break;
+                case 5:
+                    strengthBar.classList.add('strong');
+                    strengthText.textContent = 'Strong 💪';
+                    break;
+                default:
+                    strengthText.textContent = '';
+                    break;
+            }
+        });
+
+        // Selection Page Logic
+        function resetSelections(level) {
+            if (level <= 0) { selectedClass = null; classSelectionDiv.style.display = 'none'; }
+            if (level <= 1) { selectedStream = null; streamSelectionDiv.style.display = 'none'; }
+            if (level <= 2) { selectedSubject = null; subjectSelectionDiv.style.display = 'none'; }
+            viewMaterialsBtn.style.display = 'none';
+        }
+
+        function selectBoardType(boardType) {
+            selectedBoardType = boardType;
+            resetSelections(0);
+            document.querySelectorAll('.board-type-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            const classes = Object.keys(subjectsData[boardType]);
+            classGrid.innerHTML = classes.map(cls => `<div class="class-option" onclick="selectClass(${cls})"><h3>Class ${cls}</h3></div>`).join('');
+            classSelectionDiv.style.display = 'block';
+        }
+
+        function selectClass(classNum) {
+            selectedClass = classNum;
+            resetSelections(1);
+            document.querySelectorAll('.class-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            const streams = Object.keys(subjectsData[selectedBoardType][selectedClass]);
+            streamContainer.innerHTML = streams.map(stream => `<div class="stream-option" onclick="selectStream('${stream}')"><h3>${streamNames[stream] || stream}</h3></div>`).join('');
+            streamSelectionDiv.style.display = 'block';
+        }
+
+        function selectStream(streamName) {
+            selectedStream = streamName;
+            resetSelections(2);
+            document.querySelectorAll('.stream-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            const subjects = subjectsData[selectedBoardType][selectedClass][streamName] || [];
+            subjectContainer.innerHTML = subjects.map(sub => `<div class="subject-option" onclick="selectSubject('${sub}')"><span>${sub}</span></div>`).join('');
+            subjectSelectionDiv.style.display = 'block';
+        }
+
+        function selectSubject(subjectName) {
+            selectedSubject = subjectName;
+            document.querySelectorAll('.subject-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            viewMaterialsBtn.style.display = 'block';
+        }
+
+        function viewMaterials() {
+            mainBoardTypeSelect.value = selectedBoardType;
+            updateMainClasses(); 
+            mainClassSelect.value = selectedClass;
+            updateMainStreams();
+            mainStreamSelect.value = selectedStream;
+            updateMainSubjects(); 
+            mainSubjectSelect.value = selectedSubject;
+            checkMainSelection();
+            showPage('main');
+        }
+        
+        // Dropdown Population Logic
+        function populateClasses(boardType, classSelect) {
+            classSelect.innerHTML = '<option value="">Choose class</option>';
+            if (boardType) {
+                Object.keys(subjectsData[boardType]).forEach(cls => { classSelect.innerHTML += `<option value="${cls}">Class ${cls}</option>`; });
+                classSelect.disabled = false;
+            } else {
+                 classSelect.disabled = true;
+            }
+        }
+
+        function populateStreams(boardType, classVal, streamSelect) {
+            streamSelect.innerHTML = '<option value="">Choose stream</option>';
+            if (boardType && classVal) {
+                Object.keys(subjectsData[boardType][classVal]).forEach(stream => { streamSelect.innerHTML += `<option value="${stream}">${streamNames[stream] || stream}</option>`; });
+                streamSelect.disabled = false;
+            } else {
+                 streamSelect.disabled = true;
+            }
+        }
+
+        function populateSubjects(boardType, classVal, streamVal, subjectSelect) {
+            subjectSelect.innerHTML = '<option value="">Choose subject</option>';
+            if (boardType && classVal && streamVal) {
+                (subjectsData[boardType][classVal][streamVal] || []).forEach(sub => { subjectSelect.innerHTML += `<option value="${sub}">${sub}</option>`; });
+                subjectSelect.disabled = false;
+            } else {
+                 subjectSelect.disabled = true;
+            }
+        }
+
+        // Main Page Dropdown Handlers
+        function updateMainClasses() { const boardType = mainBoardTypeSelect.value; populateClasses(boardType, mainClassSelect); updateMainStreams(); }
+        function updateMainStreams() { const boardType = mainBoardTypeSelect.value; const classVal = mainClassSelect.value; populateStreams(boardType, classVal, mainStreamSelect); updateMainSubjects(); }
+        function updateMainSubjects() { const boardType = mainBoardTypeSelect.value; const classVal = mainClassSelect.value; const streamVal = mainStreamSelect.value; populateSubjects(boardType, classVal, streamVal, mainSubjectSelect); checkMainSelection(); }
+        function checkMainSelection() { mainViewMaterialsBtn.disabled = !(mainBoardTypeSelect.value && mainClassSelect.value && mainStreamSelect.value && mainSubjectSelect.value); }
+        mainBoardTypeSelect.addEventListener('change', updateMainClasses);
+        mainClassSelect.addEventListener('change', updateMainStreams);
+        mainStreamSelect.addEventListener('change', updateMainSubjects);
+        mainSubjectSelect.addEventListener('change', checkMainSelection);
+
+        // Admin Page Dropdown Handlers
+        adminBoardType.addEventListener('change', () => { populateClasses(adminBoardType.value, adminClass); adminStream.disabled = true; adminStream.innerHTML = '<option value="">Choose stream</option>'; adminSubject.disabled = true; adminSubject.innerHTML = '<option value="">Choose subject</option>'; });
+        adminClass.addEventListener('change', () => { populateStreams(adminBoardType.value, adminClass.value, adminStream); adminSubject.disabled = true; adminSubject.innerHTML = '<option value="">Choose subject</option>'; });
+        adminStream.addEventListener('change', () => { populateSubjects(adminBoardType.value, adminClass.value, adminStream.value, adminSubject); });
+        
+        // Admin Upload Form
+        uploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (fileUpload.files.length > 0) {
+                const fileName = fileUpload.files[0].name;
+                uploadMessage.innerHTML = `<div class="success-message">Simulated upload of '${fileName}' was successful!</div>`;
+                uploadForm.reset();
+                adminClass.disabled = true;
+                adminStream.disabled = true;
+                adminSubject.disabled = true;
+            } else {
+                uploadMessage.innerHTML = `<div class="error-message">Please select a file to upload.</div>`;
+            }
+            setTimeout(() => { uploadMessage.innerHTML = '' }, 4000);
+        });
+
+        // Direct Redirect for Materials Button
+        function redirectToMaterials() {
+            const url = "https://nammakalvi.com/tamil-nadu-state-board-study-materials/";
+            window.open(url, '_blank');
+        }
+
+        // --- INITIALIZATION ---
+        showPage('login');
+    </script>
+</body>
+</html>
